@@ -1,4 +1,4 @@
 CJEditor
 ========
 
-A very boring text editor made on Java.
+Javaで実装された文字コード指定、文字の検索と置換え機能が付いたTabベースのテキストエディタです。
