@@ -1,27 +1,28 @@
 package frame;
 
-import javax.swing.JTextPane;
-import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.StyledDocument;
 import java.awt.Color;
-import javax.swing.*;
+
+import javax.swing.JTextPane;
+import javax.swing.SwingUtilities;
+import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 
 public class TextProcessor {
 	private static int m_Current=0;
 	private static boolean m_RecentReplaced=false;
 	private static boolean m_found=false;
 	private static boolean m_init=false;
-	
-	//ƒŠƒZƒbƒgˆ—
+
+	//ãƒªã‚»ãƒƒãƒˆå‡¦ç†
 	public static void ResetParam(){
 		m_Current=0;
 		m_RecentReplaced=false;
 		m_found=false;
 		m_init=false;
 	}
-	//ƒeƒLƒXƒgƒy[ƒ““à‚Ìm_Current”Ô–ÚˆÈ~‚ÌêŠ‚©‚çAquery•¶š—ñ‚ªAÅ‰‚ÉŒ©‚Â‚©‚é‚Æ‚±‚ë‚ğŒŸo‚µA”wŒi‚ğ‰©F‚ÅƒnƒCƒ‰ƒCƒg‚·‚é
-	//‚»‚ÌŒ©‚Â‚©‚Á‚½êŠ‚ğAV‚½‚Èm_Current‚Æ‚·‚éB
+	//ãƒ†ã‚­ã‚¹ãƒˆãƒšãƒ¼ãƒ³å†…ã®m_Currentç•ªç›®ä»¥é™ã®å ´æ‰€ã‹ã‚‰ã€queryæ–‡å­—åˆ—ãŒã€æœ€åˆã«è¦‹ã¤ã‹ã‚‹ã¨ã“ã‚ã‚’æ¤œå‡ºã—ã€èƒŒæ™¯ã‚’é»„è‰²ã§ãƒã‚¤ãƒ©ã‚¤ãƒˆã™ã‚‹
+	//ãã®è¦‹ã¤ã‹ã£ãŸå ´æ‰€ã‚’ã€æ–°ãŸãªm_Currentã¨ã™ã‚‹ã€‚
 	public static int FindNext(String query,JTextPane jfield){
 		if(m_RecentReplaced==false&&m_init==true){
 			m_Current+=query.length();
@@ -35,25 +36,25 @@ public class TextProcessor {
 			m_Current=field.indexOf(query,m_Current);
 		}
 		m_found=true;
-		
+
 		StyledDocument doc = (StyledDocument) jfield.getDocument();
 		SimpleAttributeSet plane = new SimpleAttributeSet();
 		doc.setCharacterAttributes(0, field.length(), plane, true);
-		
+
 		plane = new SimpleAttributeSet();
 		StyleConstants.setBackground(plane, Color.YELLOW);
 		doc.setCharacterAttributes(m_Current, query.length(), plane,true);
 		return m_Current;
 	}
-	
 
-	//ƒeƒLƒXƒgƒy[ƒ““à‚Å‘O‰ñ‚ÌŒŸõ‚Å”­Œ©‚³‚ê‚½‰ÓŠ‚ğA’u‚«Š·‚¦‚½‚¢•¶š—ñ‚É’u‚«Š·‚¦‚é
-	//’u‚«Š·‚¦‚½êŠ‚Ìˆê‚ÂŸ‚ğV‚½‚Èm_Current‚Æ‚·‚éB
+
+	//ãƒ†ã‚­ã‚¹ãƒˆãƒšãƒ¼ãƒ³å†…ã§å‰å›ã®æ¤œç´¢ã§ç™ºè¦‹ã•ã‚ŒãŸç®‡æ‰€ã‚’ã€ç½®ãæ›ãˆãŸã„æ–‡å­—åˆ—ã«ç½®ãæ›ãˆã‚‹
+	//ç½®ãæ›ãˆãŸå ´æ‰€ã®ä¸€ã¤æ¬¡ã‚’æ–°ãŸãªm_Currentã¨ã™ã‚‹ã€‚
 	public static int Replace(String query,String result,JTextPane jfield){
 		m_RecentReplaced=true;
 		if(m_found==true){
 			StringBuffer field=new StringBuffer(jfield.getText());
-			
+
 			StyledDocument doc = (StyledDocument) jfield.getDocument();
 			SimpleAttributeSet plane = new SimpleAttributeSet();
 			doc.setCharacterAttributes(0, field.length(), plane, true);
@@ -66,13 +67,13 @@ public class TextProcessor {
 		}
 	}
 
-	//ƒeƒLƒXƒgƒGƒŠƒA(ƒy[ƒ“)“à‚Ìquery•¶š—ñ‚ğ‘S‚Ä’T‚µo‚µAŒ©‚Â‚©‚Á‚½êŠ‚Ì”wŒi‚ğ‰©F‚ÅƒnƒCƒ‰ƒCƒg‚·‚é
+	//ãƒ†ã‚­ã‚¹ãƒˆã‚¨ãƒªã‚¢(ãƒšãƒ¼ãƒ³)å†…ã®queryæ–‡å­—åˆ—ã‚’å…¨ã¦æ¢ã—å‡ºã—ã€è¦‹ã¤ã‹ã£ãŸå ´æ‰€ã®èƒŒæ™¯ã‚’é»„è‰²ã§ãƒã‚¤ãƒ©ã‚¤ãƒˆã™ã‚‹
 	private static void FindStr(String query,JTextPane jfield){
 		String field=jfield.getText();
 		StyledDocument doc = (StyledDocument) jfield.getDocument();
 		SimpleAttributeSet plane = new SimpleAttributeSet();
 		doc.setCharacterAttributes(0, field.length(), plane, true);
-		
+
 		SimpleAttributeSet attr = new SimpleAttributeSet();
 		StyleConstants.setBackground(attr, Color.YELLOW);
 		String[] keywords={query};
@@ -85,42 +86,42 @@ public class TextProcessor {
 			}
 		}
 	}
-	//FindStrƒƒ\ƒbƒh‚ğ”ñ“¯Šú“I‚ÉÀs
+	//FindStrãƒ¡ã‚½ãƒƒãƒ‰ã‚’éåŒæœŸçš„ã«å®Ÿè¡Œ
 	public static void FindString(final String query,final JTextPane jfield){
 		SwingUtilities.invokeLater(new Runnable(){
-			
+
 			public void run(){
 				FindStr(query,jfield);
 			}
 		});
 	}
 
-	//w’è‚µ‚½ƒeƒLƒXƒgƒGƒŠƒA(ƒy[ƒ“)“à‚Å‚ÌƒnƒCƒ‰ƒCƒg‚ğƒŠƒZƒbƒg‚·‚é
+	//æŒ‡å®šã—ãŸãƒ†ã‚­ã‚¹ãƒˆã‚¨ãƒªã‚¢(ãƒšãƒ¼ãƒ³)å†…ã§ã®ãƒã‚¤ãƒ©ã‚¤ãƒˆã‚’ãƒªã‚»ãƒƒãƒˆã™ã‚‹
 	public static void ResetAttribute(final JTextPane jfield){
 		SwingUtilities.invokeLater(new Runnable(){
 			public void run(){
 				StyledDocument doc = (StyledDocument) jfield.getDocument();
 				SimpleAttributeSet plane = new SimpleAttributeSet();
 				doc.setCharacterAttributes(0, jfield.getText().length(), plane, true);
-				
+
 				SimpleAttributeSet attr = new SimpleAttributeSet();
 				doc.setCharacterAttributes(0, jfield.getText().length(), attr, true);
 			}
 		});
 	}
 
-	//ƒeƒLƒXƒgƒGƒŠƒA(ƒy[ƒ“)“à‚Ìquery‚Ì•¶š—ñ‚ğresult‚É’u‚«Š·‚¦‚éB
+	//ãƒ†ã‚­ã‚¹ãƒˆã‚¨ãƒªã‚¢(ãƒšãƒ¼ãƒ³)å†…ã®queryã®æ–‡å­—åˆ—ã‚’resultã«ç½®ãæ›ãˆã‚‹ã€‚
 	private static void ReplaceStr(final String query,final String result,final JTextPane jfield){
 		String re=jfield.getText().replaceAll(query, result);
 		jfield.setText(re);
 	}
-	//ReplaceStrƒƒ\ƒbƒh‚ğ”ñ“¯Šú“I‚ÉÀs
+	//ReplaceStrãƒ¡ã‚½ãƒƒãƒ‰ã‚’éåŒæœŸçš„ã«å®Ÿè¡Œ
 	public static void ReplaceString(final String query,final String result,final JTextPane jfield){
 		SwingUtilities.invokeLater(new Runnable(){
-			
+
 			public void run(){
 				ReplaceStr(query,result,jfield);
 			}
-		});		
+		});
 	}
 }

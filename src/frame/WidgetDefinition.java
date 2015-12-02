@@ -1,30 +1,36 @@
 package frame;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.awt.event.*;
-import javax.swing.*;
+
+import javax.swing.ButtonGroup;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JRadioButtonMenuItem;
 
 
 public class WidgetDefinition {
 	public static void Regist(JFrame jframe,ActionListener al){
 		JMenuBar menubar=new JMenuBar();
 		ArrayList<String> str=new ArrayList<String>();
-		
-		//ƒgƒbƒvƒŒƒxƒ‹‚Ìƒƒjƒ…[‚ğ“o˜^‚·‚é
-		str.add("ƒtƒ@ƒCƒ‹");
-		str.add("•ÒW");
-		str.add("ƒGƒ“ƒR[ƒfƒBƒ“ƒO");
-		str.add("ŒŸõ");
+
+		//ãƒˆãƒƒãƒ—ãƒ¬ãƒ™ãƒ«ã®ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚’ç™»éŒ²ã™ã‚‹
+		str.add("ãƒ•ã‚¡ã‚¤ãƒ«");
+		str.add("ç·¨é›†");
+		str.add("ã‚¨ãƒ³ã‚³ãƒ¼ãƒ‡ã‚£ãƒ³ã‚°");
+		str.add("æ¤œç´¢");
 		JMenu menu[] = new JMenu[str.size()];
 		for(int i=0;i<str.size();++i){
 			menu[i] = new JMenu(str.get(i));
 			menubar.add(menu[i]);
 		}
 		str.clear();
-		//uƒtƒ@ƒCƒ‹v“à‚Ìƒƒjƒ…[‚ğ“o˜^‚·‚é
-		str.add("V‹Kì¬");
-		str.add("ŠJ‚­");
-		str.add("ã‘‚«•Û‘¶");
-		str.add("–¼‘O‚ğ•t‚¯‚Ä•Û‘¶");
+		//ã€Œãƒ•ã‚¡ã‚¤ãƒ«ã€å†…ã®ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚’ç™»éŒ²ã™ã‚‹
+		str.add("æ–°è¦ä½œæˆ");
+		str.add("é–‹ã");
+		str.add("ä¸Šæ›¸ãä¿å­˜");
+		str.add("åå‰ã‚’ä»˜ã‘ã¦ä¿å­˜");
 		JMenuItem jmenu1[];
 		jmenu1=new JMenuItem[str.size()];
 		for(int i=0;i<str.size();++i){
@@ -33,11 +39,11 @@ public class WidgetDefinition {
 			jmenu1[i].addActionListener(al);
 		}
 		str.clear();
-		//u•ÒWv“à‚Ìƒƒjƒ…[‚ğ“o˜^‚·‚é
-		str.add("ƒRƒs[");
-		str.add("Ø‚èæ‚è");
-		str.add("“\•t‚¯");
-		str.add("‘S‚Ä‘I‘ğ");
+		//ã€Œç·¨é›†ã€å†…ã®ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚’ç™»éŒ²ã™ã‚‹
+		str.add("ã‚³ãƒ”ãƒ¼");
+		str.add("åˆ‡ã‚Šå–ã‚Š");
+		str.add("è²¼ä»˜ã‘");
+		str.add("å…¨ã¦é¸æŠ");
 		JMenuItem jmenu2[];
 		jmenu2=new JMenuItem[str.size()];
 		for(int i=0;i<str.size();++i){
@@ -46,7 +52,7 @@ public class WidgetDefinition {
 			jmenu2[i].addActionListener(al);
 		}
 		str.clear();
-		//uƒGƒ“ƒR[ƒhv“à‚Ìƒƒjƒ…[‚ğ“o˜^‚·‚é
+		//ã€Œã‚¨ãƒ³ã‚³ãƒ¼ãƒ‰ã€å†…ã®ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚’ç™»éŒ²ã™ã‚‹
 		str.add("UTF-8");
 		str.add("Shift_Jis");
 		str.add("EUC-JP");
@@ -55,7 +61,7 @@ public class WidgetDefinition {
 		JRadioButtonMenuItem jmenu6[];
 		jmenu6=new JRadioButtonMenuItem[str.size()];
 		ButtonGroup group = new ButtonGroup();
-		
+
 		for(int i=0;i<str.size();++i){
 			jmenu6[i]=new JRadioButtonMenuItem(str.get(i));
 			if(i==0) jmenu6[i].setSelected(true);
@@ -64,10 +70,10 @@ public class WidgetDefinition {
 			jmenu6[i].addActionListener(al);
 		}
 		str.clear();
-		//uŒŸõv“à‚Ìƒƒjƒ…[‚ğ“o˜^‚·‚é
-		str.add("ŒŸõ");
-		str.add("’u‚«Š·‚¦");
-		str.add("’€ŸŒŸõ");
+		//ã€Œæ¤œç´¢ã€å†…ã®ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚’ç™»éŒ²ã™ã‚‹
+		str.add("æ¤œç´¢");
+		str.add("ç½®ãæ›ãˆ");
+		str.add("é€æ¬¡æ¤œç´¢");
 		JMenuItem jmenu3[];
 		jmenu3=new JMenuItem[str.size()];
 		for(int i=0;i<str.size();++i){
@@ -76,7 +82,7 @@ public class WidgetDefinition {
 			jmenu3[i].addActionListener(al);
 		}
 		str.clear();
-		//ƒtƒŒ[ƒ€ƒEƒBƒ“ƒhƒE‚Ìƒƒjƒ…[‚ÉÀÛ‚É“o˜^‚·‚é
-		jframe.setJMenuBar(menubar);			
+		//ãƒ•ãƒ¬ãƒ¼ãƒ ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã«å®Ÿéš›ã«ç™»éŒ²ã™ã‚‹
+		jframe.setJMenuBar(menubar);
 	}
 }

@@ -1,22 +1,40 @@
 package frame;
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.ImageProducer;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 
-import file.FileUnit;
-import javax.swing.*;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
+import javax.swing.JTextPane;
+import javax.swing.UIManager;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import file.FileUnit;
+
 //タブに関する処理を行う
-public class TabManager {
+public class TabManager extends JFrame{
+
+	public TabManager()
+	{
+		super();
+	}
+
 	//新規テキストファイル選択時の編集エリアとタブを生成
-	public static void MakeNewTab(final FrameWrapper Frame,String str,int i,final JTabbedPane tp,final JLabel lab,final ArrayList<FileUnit> files){
+	public void MakeNewTab(final FrameWrapper Frame,String str,int i,final JTabbedPane tp,final JLabel lab,final ArrayList<FileUnit> files){
 		JTextPane area=new JTextPane();
 		//テキストファイルのどこにカーソルがあるかを取得するようにする
 		class TextPaneCangeCursor implements CaretListener,DocumentListener{
@@ -66,8 +84,21 @@ public class TabManager {
 		panel.setLayout(new BorderLayout(5,5));
 		JLabel label = new JLabel(str,UIManager.getIcon("FileView.fileIcon"),JLabel.LEFT);
 		panel.add(label,BorderLayout.CENTER);
-		
-		ImageIcon icon = new ImageIcon("./closelabel.gif");
+
+		ClassLoader loader = this.getClass().getClassLoader();
+
+		URL url = loader.getResource("1168_16.png");
+		Image im = null;
+
+		try
+		{
+			im = this.createImage((ImageProducer)url.getContent());
+		}catch(Exception ex)
+		{
+
+		}
+
+		ImageIcon icon = new ImageIcon(im);
 		JLabel closeLabel = new JLabel(icon);
 		//タブ内の「✕」ボタン(closelabel.gif)をクリックすると、そのタブが閉じる。保存されていないまま閉じようとしたら、保存を促すメッセージを表示し、保存の手続きを行う
 		closeLabel.addMouseListener(new MouseAdapter() {
@@ -112,7 +143,7 @@ public class TabManager {
 	}
 
 	//既存のファイル選択時の編集エリアとタブを生成
-	public static void MakeNewTab(final FrameWrapper Frame,FileUnit f,int i,final JTabbedPane tp,final JLabel lab,final ArrayList<FileUnit> files){
+	public void MakeNewTab(final FrameWrapper Frame,FileUnit f,int i,final JTabbedPane tp,final JLabel lab,final ArrayList<FileUnit> files){
 		final JTextPane area=new JTextPane();
 		//テキストファイルのどこにカーソルがあるかを取得するようにする
 		class TextPaneCangeCursor implements CaretListener,DocumentListener{
@@ -159,16 +190,29 @@ public class TabManager {
 
 		//テキストエリアにファイルから取得した文字列をセット
 		area.setText(f.m_Buffer);
-		
+
 		//タブ内に載せるアイコンを選択
 		JPanel panel = new JPanel();
 		panel.setOpaque(false);
 		panel.setLayout(new BorderLayout(5,5));
-		
+
 		JLabel label = new JLabel(f.m_FileName,UIManager.getIcon("FileView.fileIcon"),JLabel.LEFT);
 		panel.add(label,BorderLayout.CENTER);
 		//タブ内の「✕」ボタン(closelabel.gif)をクリックすると、そのタブが閉じる。保存されていないまま閉じようとしたら、保存を促すメッセージを表示し、保存の手続きを行う
-		ImageIcon icon = new ImageIcon("./closelabel.gif");
+
+		ClassLoader loader = this.getClass().getClassLoader();
+
+		URL url = loader.getResource("1168_16.png");
+		Image im = null;
+
+		try
+		{
+			im = this.createImage((ImageProducer)url.getContent());
+		}catch(Exception ex)
+		{
+
+		}
+		ImageIcon icon = new ImageIcon(im);
 		JLabel closeLabel = new JLabel(icon);
 		closeLabel.addMouseListener(new MouseAdapter() {
 		    public void mousePressed(MouseEvent event) {
@@ -204,7 +248,7 @@ public class TabManager {
 		});
 		panel.add(closeLabel,BorderLayout.EAST);
 		//タブ内にラベルやタイトル名、閉じるためのラベルを選択
-		//そのタブに対応するテキストペーンも追加する		
+		//そのタブに対応するテキストペーンも追加する
 		JScrollPane scrollpane1=new JScrollPane(area);
 		tp.addTab(null,scrollpane1);
 		tp.setTabComponentAt(i-1, panel);
